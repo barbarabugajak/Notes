@@ -9,6 +9,7 @@ import {
 import Dashboard from './components/Dashboard.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import Login from './components/Login.jsx';
+import NewNote from './components/NewNote.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <ErrorPage />
   },
-
+  {
+    path: "/new",
+    element: <NewNote />,
+    errorElement: <ErrorPage />
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
