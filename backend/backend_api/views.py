@@ -13,15 +13,35 @@ from django.utils.decorators import method_decorator
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import json
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-# Create your views here.
+# Create your views here
 @method_decorator(csrf_exempt, name='dispatch')
 class NoteListCreate(generics.ListCreateAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
+    @csrf_exempt    
     def perform_create(self, serializer):
+        print('Creating note...')
         serializer.save(owner=self.request.user)
+        # Add owner as collaborator
+        serializer.instance.collaborators.add(self.request.user)
+
+@api_view(['POST'])
+@csrf_exempt
+def note_list_create(request):
+    if request.method == 'POST':
+        serializer = NoteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(owner=request.user)
+            # Add owner as collaborator
+            serializer.instance.collaborators.add(request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # login required 
 @method_decorator(csrf_exempt, name='dispatch')
