@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LogoutButton from "./LogoutButton";
+import { fetchUser } from "../util";
 
 axios.defaults.withCredentials = true;
 
@@ -9,19 +10,12 @@ export default function Dashboard(){
     const [id, setId] = useState(null);
 
     useEffect(() => {
-        fetchUser();
+        let userdata = fetchUser();
+        userdata.then((data) => {
+            setUsername(data[0]);
+            setId(data[1]);
+        });
     }, []);
-
-    const fetchUser = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/api/user', { withCredentials: true });
-            console.log(response.data);
-            setUsername(response.data.username);
-            setId(response.data.id);
-        } catch (error) {
-            console.error('Error fetching data', error);
-        }
-    };
 
     const fetchData = async () => {
         try {
