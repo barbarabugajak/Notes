@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LogoutButton from "./LogoutButton";
 
 axios.defaults.withCredentials = true;
 
@@ -22,15 +23,6 @@ export default function Dashboard(){
         }
     };
 
-    const logout = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/api/logout', { withCredentials: true });
-            console.log(response.data);
-        } catch (error) {
-            console.error('Error fetching data', error);
-        }
-    };
-
     const fetchData = async () => {
         try {
             const URL = 'http://localhost:8000/api/notes/user/' + id
@@ -47,18 +39,12 @@ export default function Dashboard(){
         }
     }, [id]);
 
-    function handleLogout() {
-        logout();
-        window.location.href = '/login';
-    }
-
-
 
     return (
         <div>
             <h1>Dashboard</h1>
             <p>Welcome to the dashboard, {username && username}</p>
-            <button onClick={handleLogout}>Logout</button>
+            <LogoutButton />
         </div>
     )
 }
