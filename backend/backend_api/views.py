@@ -57,6 +57,8 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
 @api_view(['POST'])
 def login_view(request):
     try:
+        if request.user.is_authenticated:
+            return JsonResponse({'detail': 'You are already authenticated'}, status=status.HTTP_400_BAD_REQUEST)
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
