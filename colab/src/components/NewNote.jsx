@@ -99,6 +99,13 @@ export default function NewNote() {
             </div>
 
             <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+            <button 
+                type="button" 
+                className="btn btn-secondary" 
+                style={{
+                    marginLeft: '10px'
+                }}
+                onClick={() => window.location.href = "/"}>Cancel</button>
         </div>
     )
 }
