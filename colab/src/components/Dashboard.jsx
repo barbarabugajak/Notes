@@ -43,7 +43,7 @@ export default function Dashboard(){
             <h1>Dashboard</h1>
             <p>Welcome to the dashboard, {username && username}</p>
             <h2>Your Notes</h2>
-            <button type="button" class="btn btn-primary" onClick={() => window.location.href = "/new"}>Add a new note</button>
+            <button type="button" className="btn btn-primary" onClick={() => window.location.href = "/new"}>Add a new note</button>
             {notes.map((note) => (
                 <NoteShort key={note.id} note={note} />
             ))}

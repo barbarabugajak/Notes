@@ -8,24 +8,27 @@ export default function NewNote() {
     const [noteText, setNoteText] = useState('')
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const csrfToken = getCookie('csrftoken');
-        console.log(csrfToken)
-        axios.post('http://localhost:8000/api/notes', {
-            name: noteName,
-            text: noteText
-        }, { 
-            withCredentials: true,
+    e.preventDefault();
+    const csrfToken = getCookie('csrftoken'); // Ensure this function correctly retrieves the CSRF token
+    console.log(csrfToken);
+    axios.post('http://localhost:8000/api/notes', {
+        name: noteName,
+        text: noteText
+    }, { 
+        withCredentials: true,
+        headers: {
             'X-CSRFToken': csrfToken,
             'Content-Type': 'application/json'
-        })
-        .then((response) => {
-            console.log(response.data);
-        })
-        .catch((error) => {
-            console.error('Error fetching data', error);
-        });
-    }
+        }
+    })
+    .then((response) => {
+        console.log(response.data);
+    })
+    .catch((error) => {
+        console.error('Error fetching data', error);
+    });
+};
+
 
     return (
         <div className="container">

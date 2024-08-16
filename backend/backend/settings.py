@@ -57,6 +57,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # That'll allow requests from the frontend
 ]
 
+
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
 ]
