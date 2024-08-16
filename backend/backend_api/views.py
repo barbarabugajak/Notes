@@ -76,6 +76,16 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+    
+    @csrf_exempt
+    def update(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            instance.text = request.data.get('text')
+            instance.save()
+            return JsonResponse({'status': 'success', 'message': 'Note updated successfully'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
 
 # Get current user
 @api_view(['GET'])
