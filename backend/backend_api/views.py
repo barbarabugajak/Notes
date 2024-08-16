@@ -74,9 +74,9 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
 def current_user(request):
     return JsonResponse(UserSerializer(request.user).data)
 
-# User list view
+# User list view (NOT CREATE)
 @method_decorator(csrf_exempt, name='dispatch')
-class UserList(generics.ListCreateAPIView):
+class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 

@@ -11,5 +11,5 @@ urlpatterns = [
    path('api/logout', logout_view, name='logout'),
    path('api/notes/user/<str:id>', UserNotes.as_view(), name='your-notes'),
    path('api/user', current_user, name='current-user'),
-   path('api/user-list', UserList, name='all-users'),
+   path('api/user-list', UserList.as_view(), name='all-users'),
 ]
