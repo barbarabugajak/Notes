@@ -9,7 +9,6 @@ export default function NoteShort({ note }) {
         return str;
       };
 
-    
 
     return (
         <div className="card">

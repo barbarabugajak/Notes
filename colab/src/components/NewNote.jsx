@@ -1,33 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getCookie } from '../util'
+import { fetchUser, getCookie } from '../util'
 
 export default function NewNote() {
     const [noteName, setNoteName] = useState('')
     const [noteText, setNoteText] = useState('')
+    const [ID, setId] = useState(null);
+    useEffect(() => {
+        let userdata = fetchUser();
+        userdata.then((data) => {
+            setId(data[1]);
+        });
+    }, []);
 
+    
     const handleSubmit = (e) => {
-    e.preventDefault();
-    const csrfToken = getCookie('csrftoken'); // Ensure this function correctly retrieves the CSRF token
-    console.log(csrfToken);
-    axios.post('http://localhost:8000/api/notes', {
-        name: noteName,
-        text: noteText
-    }, { 
-        withCredentials: true,
-        headers: {
-            'X-CSRFToken': csrfToken,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then((response) => {
-        console.log(response.data);
-    })
-    .catch((error) => {
-        console.error('Error fetching data', error);
-    });
-};
+        e.preventDefault();
+        const csrfToken = getCookie('csrftoken'); // Ensure this function correctly retrieves the CSRF token
+        console.log(csrfToken);
+        axios.post('http://localhost:8000/api/notes', {
+            name: noteName,
+            text: noteText,
+            owner: ID,
+        }, { 
+            withCredentials: true,
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.error('Error fetching data', error);
+        });
+    };
 
 
     return (
