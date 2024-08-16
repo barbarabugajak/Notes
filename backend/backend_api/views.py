@@ -30,6 +30,14 @@ class NoteListCreate(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
         # Add owner as collaborator
         serializer.instance.collaborators.add(self.request.user)
+        # Get all collaborators
+        collaborators = self.request.data.get('collaborators')
+        for collaborator in collaborators:
+            try:
+                user = User.objects.get(pk=collaborator)
+                serializer.instance.collaborators.add(user)
+            except Exception as e:
+                print({'error': str(e)})
 
 @api_view(['POST'])
 @csrf_exempt

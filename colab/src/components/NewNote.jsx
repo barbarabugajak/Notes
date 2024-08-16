@@ -6,8 +6,12 @@ import { fetchUser, getCookie, fetchAllUsers } from '../util'
 export default function NewNote() {
     const [noteName, setNoteName] = useState('')
     const [noteText, setNoteText] = useState('')
+    const [noteCollaborators, setNoteCollaborators] = useState([])
+
     const [ID, setId] = useState(null);
-    
+    const [allUsers, setAllUsers] = useState([]);
+
+
     useEffect(() => {
         let userdata = fetchUser();
         userdata.then((data) => {
@@ -18,9 +22,14 @@ export default function NewNote() {
     useEffect(() => {
         let allUsers = fetchAllUsers();
         allUsers.then((data) => {
-            console.log(data);
+            console.log(data, ID);
+            setAllUsers(data.filter((user) => user.id !== ID));
         });
-    }, []);
+    }, [ID]);
+
+    useEffect(() => {
+    
+    }, [allUsers]);
 
     
     const handleSubmit = (e) => {
@@ -31,6 +40,7 @@ export default function NewNote() {
             name: noteName,
             text: noteText,
             owner: ID,
+            collaborators: noteCollaborators
         }, { 
             withCredentials: true,
             headers: {
@@ -51,16 +61,44 @@ export default function NewNote() {
         <div className="container">
             <h1>New Note</h1>
 
-                <div className="mb-3">
-                    <label htmlFor="noteName" className="form-label">Note Name</label>
-                    <input type="text" className="form-control" id="noteName" onChange={(e) => setNoteName(e.target.value)}/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="noteText" className="form-label">Note Text</label>
-                    <textarea className="form-control" id="noteText" rows="3" onChange={(e) => setNoteText(e.target.value)}></textarea>
-                </div>
+            <div className="mb-3">
+                <label htmlFor="noteName" className="form-label">Note Name</label>
+                <input type="text" className="form-control" id="noteName" onChange={(e) => setNoteName(e.target.value)} />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="noteText" className="form-label">Note Text</label>
+                <textarea className="form-control" id="noteText" rows="3" onChange={(e) => setNoteText(e.target.value)}></textarea>
+            </div>
 
-                <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+            <div className="mb-3">
+                <label htmlFor="noteOwner" className="form-label">Note Collaborators</label>
+                {allUsers.map((user) => (
+                    <div key={user.id}>
+                        <input className="form-check-input" type="checkbox" name="noteOwner" id={user.id} value={user.id} 
+                        onChange={
+                            (e) => {
+                                if (e.target.checked) {
+                                    setNoteCollaborators([...noteCollaborators, user.id]);
+                                } else {
+                                    setNoteCollaborators(noteCollaborators.filter((id) => id !== user.id));
+                                }
+                            }
+                        }/>
+                        <label 
+                            className="form-check-label" 
+                            htmlFor={user.id}
+                            style={
+                                {
+                                    marginLeft: '10px'
+                                }
+                            }>
+                            {user.username}
+                        </label>
+                    </div>
+                ))}
+            </div>
+
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
         </div>
     )
 }
