@@ -17,7 +17,7 @@ export default function NoteShort({ note }) {
             </div>
             <div className="card-body">
                 <p className="card-text">{fixString(note.text, 100)}</p>
-                <a href="#" className="btn btn-primary">View</a>
+                <a href={"/note/" + note.id}  className="btn btn-primary">View</a>
             </div>
         </div>
     )
