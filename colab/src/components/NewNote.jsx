@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchUser, getCookie } from '../util'
+import { fetchUser, getCookie, fetchAllUsers } from '../util'
 
 export default function NewNote() {
     const [noteName, setNoteName] = useState('')
     const [noteText, setNoteText] = useState('')
     const [ID, setId] = useState(null);
+    
     useEffect(() => {
         let userdata = fetchUser();
         userdata.then((data) => {
             setId(data[1]);
+        });
+    }, []);
+
+    useEffect(() => {
+        let allUsers = fetchAllUsers();
+        allUsers.then((data) => {
+            console.log(data);
         });
     }, []);
 
@@ -51,6 +59,7 @@ export default function NewNote() {
                     <label htmlFor="noteText" className="form-label">Note Text</label>
                     <textarea className="form-control" id="noteText" rows="3" onChange={(e) => setNoteText(e.target.value)}></textarea>
                 </div>
+
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
         </div>
     )

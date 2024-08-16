@@ -10,6 +10,16 @@ export const fetchUser = async () => {
     }
 };
 
+export const fetchAllUsers = async () => {
+    try {
+        const response = await axios.get('http://localhost:8000/api/user-list', { withCredentials: true });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data', error);
+    }
+};
+
 export function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
