@@ -32,6 +32,11 @@ export default function EditNote({ note, setIsEditing }) {
                 <button className="btn btn-primary" 
                     onClick={handleSave}
                 >Save</button>
+                <button className="btn btn-secondary" 
+                    onClick={() => setIsEditing(false)}
+                    style={{ marginLeft: '10px'}}
+                >Cancel</button>
+
             </div>
         </div>
     )
