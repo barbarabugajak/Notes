@@ -7,6 +7,13 @@ GET
 api/user
 ```
 
+## Get list of all users
+
+GET 
+```
+api/user-list
+```
+
 ## Create a note
 POST: 
 ```

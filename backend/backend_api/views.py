@@ -58,10 +58,6 @@ class UserNotes(generics.ListAPIView):
             print({'error': str(e)})
             return None
 
-# Get current user
-@api_view(['GET'])
-def current_user(request):
-    return JsonResponse(UserSerializer(request.user).data)
 
 # Instance view
 @method_decorator(csrf_exempt, name='dispatch')
@@ -72,6 +68,17 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+# Get current user
+@api_view(['GET'])
+def current_user(request):
+    return JsonResponse(UserSerializer(request.user).data)
+
+# User list view
+@method_decorator(csrf_exempt, name='dispatch')
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 # Login view
 @api_view(['POST'])
