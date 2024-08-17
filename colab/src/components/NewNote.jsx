@@ -59,7 +59,11 @@ export default function NewNote() {
 
     return (
         <div className="container">
-            <h1>New Note</h1>
+            <h1 
+                style={{
+                    marginTop: '1%',
+                    marginBottom: '1%'
+                }}>New Note</h1>
 
             <div className="mb-3">
                 <label htmlFor="noteName" className="form-label">Note Name</label>
