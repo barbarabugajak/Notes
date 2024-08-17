@@ -11,12 +11,19 @@ import ErrorPage from './components/ErrorPage.jsx';
 import Login from './components/Login.jsx';
 import NewNote from './components/NewNote.jsx';
 import Note from './components/Note.jsx';
+import Navbar from './components/Navbar.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
-    errorElement: <ErrorPage />
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
+      { 
+        path: "/",
+        element: <Dashboard />,
+      }
+    ]
   },
   {
     path: "/login",
