@@ -40,9 +40,11 @@ export default function Dashboard(){
 
     return (
         <div className="container">
-            <h1>Dashboard</h1>
-            <p>Welcome to the dashboard, {username && username}</p>
-            <h2>Your Notes</h2>
+            <h2 
+                style={{
+                    marginTop: '1%',
+                    marginBottom: '1%'
+                }}>Your Notes</h2>
             <button type="button" className="btn btn-primary" onClick={() => window.location.href = "/new"}>Add a new note</button>
             {notes.map((note) => (
                 <NoteShort key={note.id} note={note} />

@@ -11,12 +11,19 @@ import ErrorPage from './components/ErrorPage.jsx';
 import Login from './components/Login.jsx';
 import NewNote from './components/NewNote.jsx';
 import Note from './components/Note.jsx';
+import Navbar from './components/Navbar.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
-    errorElement: <ErrorPage />
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
+      { 
+        path: "/",
+        element: <Dashboard />,
+      }
+    ]
   },
   {
     path: "/login",
@@ -25,14 +32,26 @@ const router = createBrowserRouter([
   },
   {
     path: "/new",
-    element: <NewNote />,
-    errorElement: <ErrorPage />
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
+      { 
+        path: "/new",
+        element: <NewNote />,
+      }
+    ]
   },
   {
     path: "/note/:id",
-    element: <Note />,
-    errorElement: <ErrorPage />
-  }
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
+      { 
+        path: "/note/:id",
+        element: <Note />,
+      }
+    ]
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(

@@ -21,12 +21,6 @@ export default function Note() {
     if (note){
         return (
             <div className='container'>
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <a onClick={() => window.location.href = "/"} className="breadcrumb-item" aria-current="page">Dashboard</a>
-                        <li className="breadcrumb-item active" aria-current="page">{note.name}</li>
-                    </ol>
-                </nav>
                 {isEditing ? (
                     <EditNote note={note} setIsEditing={setIsEditing} />
                 ) : (
