@@ -32,8 +32,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/new",
-    element: <NewNote />,
-    errorElement: <ErrorPage />
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
+      { 
+        path: "/new",
+        element: <NewNote />,
+      }
+    ]
   },
   {
     path: "/note/:id",
