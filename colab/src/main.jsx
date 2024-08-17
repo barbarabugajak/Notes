@@ -43,9 +43,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/note/:id",
-    element: <Note />,
-    errorElement: <ErrorPage />
-  }
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
+      { 
+        path: "/note/:id",
+        element: <Note />,
+      }
+    ]
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
