@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { fetchNote } from '../util';
 import { useEffect, useState } from 'react';
 import EditNote from './EditNote';
+import axios from 'axios';
+import { handleDelete } from '../util';
+import DeleteButton from './DeleteButton';
 
 export default function Note() {
     const { id } = useParams();
@@ -34,6 +37,7 @@ export default function Note() {
                                 setIsEditing(true)
                                 console.log(isEditing)
                             }}>Edit</button>
+                            <DeleteButton id={note.id} />
                         </div>
                     </div>
                 )}

@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import DeleteButton from './DeleteButton';
 
 export default function NoteShort({ note }) {
 
@@ -18,6 +19,7 @@ export default function NoteShort({ note }) {
             <div className="card-body">
                 <p className="card-text">{fixString(note.text, 100)}</p>
                 <a href={"/note/" + note.id}  className="btn btn-primary">View</a>
+                <DeleteButton id={note.id} />
             </div>
         </div>
     )

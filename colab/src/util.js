@@ -46,3 +46,21 @@ export function getCookie(name) {
     }
     return cookieValue;
 }
+
+export const handleDelete = (id) => {
+    const csrfToken = getCookie('csrftoken'); 
+    axios.delete(`http://localhost:8000/api/notes/${id}`, { 
+        withCredentials: true,
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then((res) => {
+        console.log(res);
+        window.location.href = '/';
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
