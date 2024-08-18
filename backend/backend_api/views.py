@@ -104,6 +104,14 @@ class UserCreate(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserCreateSerializer
 
+    
+    def perform_create(self, serializer):
+        user = serializer.save()
+        user.set_password(user.password)
+        user.first_name = self.request.data.get('first_name')
+        user.last_name = self.request.data.get('last_name')
+        user.save()
+
 # Login view
 @api_view(['POST'])
 def login_view(request):
