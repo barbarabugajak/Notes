@@ -5,7 +5,7 @@ from .serializers import NoteSerializer
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserCreateSerializer
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -92,11 +92,17 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
 def current_user(request):
     return JsonResponse(UserSerializer(request.user).data)
 
-# User list view (NOT CREATE)
+# User list NOT create
 @method_decorator(csrf_exempt, name='dispatch')
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+# User create NOT list
+@method_decorator(csrf_exempt, name='dispatch')
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserCreateSerializer
 
 # Login view
 @api_view(['POST'])
