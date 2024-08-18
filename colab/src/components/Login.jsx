@@ -27,17 +27,26 @@ export default function Login(){
 
 
     return (
-        <div>
+        <div className='container' style={{
+            width: '50%',
+            margin: 'auto',
+            marginTop: '50px',
+            padding: '20px',
+            border: '1px solid #ccc',
+            borderRadius: '10px'    
+        }}>
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
                 <div>
                     <label>Username</label>
                     <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </div>
+                <p></p>
                 <div>
                     <label>Password</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
+                <p></p>
                 <button type="submit">Login</button>
             </form>
             {message && <p>{message}</p>}

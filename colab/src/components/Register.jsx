@@ -60,6 +60,8 @@ export default function Register() {
             <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
             <p></p>
             <button className="btn btn-primary" onClick={handleRegister}>Register</button>
+            <p></p>
+            <small>You already have an account? <a href='/login'>Login!</a></small>
         </div>
     )
 }
