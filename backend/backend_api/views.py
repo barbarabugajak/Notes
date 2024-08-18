@@ -116,6 +116,7 @@ class UserCreate(generics.CreateAPIView):
 
 # Login view
 @api_view(['POST'])
+@csrf_exempt
 def login_view(request):
     try:
         if request.user.is_authenticated:
