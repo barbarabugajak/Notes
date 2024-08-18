@@ -7,6 +7,14 @@ GET
 api/user
 ```
 
+## Register
+
+POST
+GET
+```
+api/register
+```
+
 ## Get list of all users
 
 GET 

@@ -12,6 +12,7 @@ import Login from './components/Login.jsx';
 import NewNote from './components/NewNote.jsx';
 import Note from './components/Note.jsx';
 import Navbar from './components/Navbar.jsx';
+import Register from './components/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/register",
+    element: <Register />,
     errorElement: <ErrorPage />
   },
   {
