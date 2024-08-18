@@ -41,6 +41,7 @@ export default function Login(){
                 <button type="submit">Login</button>
             </form>
             {message && <p>{message}</p>}
+            <small>You don't have an account? <a href="/register">Register!</a></small>
         </div>
     );
 }
