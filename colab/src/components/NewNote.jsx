@@ -50,6 +50,9 @@ export default function NewNote() {
         })
         .then((response) => {
             console.log(response.data);
+            alert('Note created successfully');
+            window.location.href = '/';
+            
         })
         .catch((error) => {
             console.error('Error fetching data', error);
