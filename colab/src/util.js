@@ -21,6 +21,7 @@ export const fetchUserById = async (id) => {
         return [response.data.username, response.data.id];
     } catch (error) {
         console.error('Error fetching data', error);
+        window.location.href = '/';
     }
 };
 
