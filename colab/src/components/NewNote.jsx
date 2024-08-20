@@ -90,7 +90,7 @@ export default function NewNote() {
                                 }
                             }} />
                         <label className="form-check-label" htmlFor={user.id} style={{ marginLeft: '10px' }}>
-                            {user.username}
+                            <a href={`users/${user.id}`}>{user.username}</a>
                         </label>
                     </div>
                 ))}
