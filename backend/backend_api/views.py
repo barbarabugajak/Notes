@@ -60,11 +60,19 @@ class UserNotes(generics.ListAPIView):
         # Access the request object using self.request
         user_id = self.kwargs.get('id')
         try:
+            # Get the user object
             user = User.objects.get(id=user_id)
-            return Note.objects.filter(collaborators=self.request.user)
+            # For security reasons, only return notes if the user is authenticated
+            if user.is_authenticated:
+                queryset = Note.objects.filter(collaborators=user)
+                if request.user.id == user.id:
+                    return queryset
+            return queryset.filter(public=True)
+            
         except Exception as e:
             print({'error': str(e)})
             return None
+
 
 
 # Instance view
