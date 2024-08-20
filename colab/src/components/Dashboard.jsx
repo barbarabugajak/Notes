@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LogoutButton from "./LogoutButton";
-import { fetchUser } from "../util";
+import { fetchUser, fetchUserById } from "../util";
+import { useParams } from "react-router-dom";
 import NoteShort from "./NoteShort";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,9 +13,15 @@ export default function Dashboard(){
     const [id, setId] = useState(null);
     const [notes, setNotes] = useState([]);
 
+    const { userId } = useParams();
+
     useEffect(() => {
-        let userdata = fetchUser();
-        userdata.then((data) => {
+        if (userId) {
+            var userData = fetchUserById(userId);
+        } else {
+            var userData = fetchUser();
+        }
+        userData.then((data) => {
             setUsername(data[0]);
             setId(data[1]);
         });
@@ -44,7 +51,7 @@ export default function Dashboard(){
                 style={{
                     marginTop: '1%',
                     marginBottom: '1%'
-                }}>Your Notes</h2>
+                }}>{userId ? username + "'s" : "Your"} notes</h2>
             <button type="button" className="btn btn-primary" onClick={() => window.location.href = "/new"}>Add a new note</button>
             {notes.map((note) => (
                 <NoteShort key={note.id} note={note} />

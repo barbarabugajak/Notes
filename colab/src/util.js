@@ -1,9 +1,22 @@
 import axios from "axios";
 import { redirect } from "react-router-dom";
 
+// Current user
 export const fetchUser = async () => {
     try {
         const response = await axios.get('http://localhost:8000/api/user', { withCredentials: true });
+        console.log(response.data);
+        return [response.data.username, response.data.id];
+    } catch (error) {
+        console.error('Error fetching data', error);
+    }
+};
+
+// By ID
+export const fetchUserById = async (id) => {
+    try {
+        const URL = 'http://localhost:8000/api/user/' + id
+        const response = await axios.get(URL, { withCredentials: true });
         console.log(response.data);
         return [response.data.username, response.data.id];
     } catch (error) {

@@ -58,6 +58,17 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/notes/:userId",
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
+      { 
+        path: "/notes/:userId",
+        element: <Dashboard />,
+      }
+    ]
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
