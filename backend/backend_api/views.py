@@ -65,7 +65,7 @@ class UserNotes(generics.ListAPIView):
             # For security reasons, only return notes if the user is authenticated
             if user.is_authenticated:
                 queryset = Note.objects.filter(collaborators=user)
-                if request.user.id == user.id:
+                if self.request.user.id == user.id:
                     return queryset
             return queryset.filter(public=True)
             
