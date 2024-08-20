@@ -1,4 +1,5 @@
 import axios from "axios";
+import { redirect } from "react-router-dom";
 
 export const fetchUser = async () => {
     try {
@@ -24,10 +25,10 @@ export const fetchNote = async (id) => {
     try {
         const URL = 'http://localhost:8000/api/notes/' + id
         const response = await axios.get(URL, { withCredentials: true });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching data', error);
+        window.location.href = '/';
     }
 };
 

@@ -94,6 +94,18 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
             return JsonResponse({'status': 'success', 'message': 'Note updated successfully'})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
+    
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            user = request.user
+            if user in instance.collaborators.all():
+                serializer = self.get_serializer(instance)
+                return Response(serializer.data)
+            else:
+                return Response({'error': 'You do not have permission to access this note.'}, status=status.HTTP_403_FORBIDDEN)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
 
 # Get current user
 @api_view(['GET'])
