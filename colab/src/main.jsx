@@ -59,12 +59,12 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: "/notes/:userId",
+    path: "/users/:userId",
     element: <Navbar />,
     errorElement: <ErrorPage />,
     children: [
       { 
-        path: "/notes/:userId",
+        path: "/users/:userId",
         element: <Dashboard />,
       }
     ]

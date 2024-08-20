@@ -99,7 +99,7 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
         try:
             instance = self.get_object()
             user = request.user
-            if user in instance.collaborators.all():
+            if user in instance.collaborators.all() or instance.public == True:
                 serializer = self.get_serializer(instance)
                 return Response(serializer.data)
             else:
