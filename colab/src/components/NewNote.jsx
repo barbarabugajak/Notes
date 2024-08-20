@@ -59,11 +59,7 @@ export default function NewNote() {
 
     return (
         <div className="container">
-            <h1 
-                style={{
-                    marginTop: '1%',
-                    marginBottom: '1%'
-                }}>New Note</h1>
+            <h1 style={{ marginTop: '1%', marginBottom: '1%' }}>New Note</h1>
 
             <div className="mb-3">
                 <label htmlFor="noteName" className="form-label">Note Name</label>
@@ -73,29 +69,24 @@ export default function NewNote() {
                 <label htmlFor="noteText" className="form-label">Note Text</label>
                 <textarea className="form-control" id="noteText" rows="3" onChange={(e) => setNoteText(e.target.value)}></textarea>
             </div>
+            <div className="mb-3">
+                <label htmlFor="noteText" className="form-label">Public: </label>
+                <input type='checkbox' style={{ marginLeft: '10px' }}></input>
+            </div>
 
             <div className="mb-3">
                 <label htmlFor="noteOwner" className="form-label">Note Collaborators</label>
                 {allUsers.map((user) => (
                     <div key={user.id}>
-                        <input className="form-check-input" type="checkbox" name="noteOwner" id={user.id} value={user.id} 
-                        onChange={
-                            (e) => {
+                        <input className="form-check-input" type="checkbox" name="noteOwner" id={user.id} value={user.id}
+                            onChange={(e) => {
                                 if (e.target.checked) {
                                     setNoteCollaborators([...noteCollaborators, user.id]);
                                 } else {
                                     setNoteCollaborators(noteCollaborators.filter((id) => id !== user.id));
                                 }
-                            }
-                        }/>
-                        <label 
-                            className="form-check-label" 
-                            htmlFor={user.id}
-                            style={
-                                {
-                                    marginLeft: '10px'
-                                }
-                            }>
+                            }} />
+                        <label className="form-check-label" htmlFor={user.id} style={{ marginLeft: '10px' }}>
                             {user.username}
                         </label>
                     </div>
@@ -103,12 +94,7 @@ export default function NewNote() {
             </div>
 
             <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-            <button 
-                type="button" 
-                className="btn btn-secondary" 
-                style={{
-                    marginLeft: '10px'
-                }}
+            <button type="button" className="btn btn-secondary" style={{ marginLeft: '10px' }}
                 onClick={() => window.location.href = "/"}>Cancel</button>
         </div>
     )
