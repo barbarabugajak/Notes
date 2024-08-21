@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DeleteButton from './DeleteButton';
+import TogglePublicButton from './TogglePublicButton';
 
 export default function NoteShort({ note }) {
 
@@ -20,6 +21,7 @@ export default function NoteShort({ note }) {
                 <p className="card-text">{fixString(note.text, 100)}</p>
                 <a href={"/note/" + note.id}  className="btn btn-primary">View</a>
                 <DeleteButton id={note.id} />
+                <TogglePublicButton noteId={note.id} isPublic={note.public} />
             </div>
         </div>
     )
