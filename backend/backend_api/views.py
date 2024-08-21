@@ -89,7 +89,8 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
     def update(self, request, *args, **kwargs):
         try:
             instance = self.get_object()
-            instance.text = request.data.get('text')
+            if request.data.get('text') != None:
+                instance.text = request.data.get('text')
             if request.data.get('public') != None:
                 instance.public = request.data.get('public')
             instance.save()
