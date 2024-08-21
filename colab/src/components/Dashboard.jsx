@@ -54,7 +54,7 @@ export default function Dashboard(){
                 }}>{userId ? username + "'s" : "Your"} notes</h2>
             <button type="button" className="btn btn-primary" onClick={() => window.location.href = "/new"}>Add a new note</button>
             {notes.map((note) => (
-                <NoteShort key={note.id} note={note} />
+                <NoteShort key={note.id} note={note} your={userId ? false : true}/>
             ))}
 
             <LogoutButton />
