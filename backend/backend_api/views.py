@@ -90,6 +90,8 @@ class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
         try:
             instance = self.get_object()
             instance.text = request.data.get('text')
+            if request.data.get('public') != None:
+                instance.public = request.data.get('public')
             instance.save()
             return JsonResponse({'status': 'success', 'message': 'Note updated successfully'})
         except Exception as e:
