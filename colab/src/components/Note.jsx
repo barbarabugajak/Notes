@@ -6,6 +6,7 @@ import EditNote from './EditNote';
 import axios from 'axios';
 import { handleDelete } from '../util';
 import DeleteButton from './DeleteButton';
+import TogglePublicButton from './TogglePublicButton';
 
 export default function Note() {
     const { id } = useParams();
@@ -38,6 +39,7 @@ export default function Note() {
                                 console.log(isEditing)
                             }}>Edit</button>
                             <DeleteButton id={note.id} />
+                            <TogglePublicButton noteId={note.id} isPublic={note.public} />
                         </div>
                     </div>
                 )}
