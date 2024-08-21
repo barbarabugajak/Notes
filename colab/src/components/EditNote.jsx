@@ -1,25 +1,15 @@
 import axios from 'axios';
-import { getCookie } from '../util'
+import { getCookie, editNote } from '../util'
 
 export default function EditNote({ note, setIsEditing }) {
 
-    const handleSave = async () => {
-        const URL = 'http://localhost:8000/api/notes/' + note.id
-        const text = document.querySelector('textarea').value;
-        const csrfToken = getCookie('csrftoken');
-        try {
-            const response = await axios.put(URL, {text: text}, { 
-                withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log(response.data);
-            setIsEditing(false)
-        } catch (error) {
-            console.error('Error fetching data', error);
+    const handleSave = () => {
+        const data = {
+            name: note.name,
+            text: document.querySelector('textarea').value
         }
+        editNote(data, note.id)
+        setIsEditing(false)
     }
 
     return (

@@ -46,6 +46,25 @@ export const fetchNote = async (id) => {
     }
 };
 
+// PUT a note
+export const editNote = async (data, id) => {
+    const URL = 'http://localhost:8000/api/notes/' + id;
+    const text = document.querySelector('textarea').value;
+    const csrfToken = getCookie('csrftoken');
+    try {
+        const response = await axios.put(URL, data, { 
+            withCredentials: true,
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error fetching data', error);
+    }
+}
+
 export function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
